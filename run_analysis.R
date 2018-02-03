@@ -14,12 +14,11 @@ merge.Y<-rbind(tr.Y,ts.Y)
 merge.subjs<-rbind(tr.subjs,ts.subjs)
 
 ##Extracts only the measurements on the mean and standard deviation for each measurement
-
-  feat<-read.table("features.txt")
+feat<-read.table("features.txt")
 
 colnames(merge.X)<-feat[,2]
-colmean<-grepl("mean()",colnames(merge.X))
-colstd<-grepl("std()",colnames(merge.X))
+colmean<-grepl("mean",colnames(merge.X))
+colstd<-grepl("std",colnames(merge.X))
 
 mean.X<-merge.X[,colmean]
 std.X<-merge.X[,colstd]
@@ -42,6 +41,6 @@ names(actnames) <- 'Activity'
 bind.all<-cbind(merge.subjs,merge.Y,merged.meanstd)
 base<-melt(bind.all,(id.vars=c("Subject","Activity"))) 
 dataset.second<- dcast(base,Subject + Activity ~variable,mean)
-names(dataset.second)[-c(1:2)]<-paste("[mean of",names(dataset.second)[-c(1:2)])
+names(dataset.second)[-c(1:2)]<-paste(names(dataset.second)[-c(1:2)])
 write.table(dataset.second, file = "./tidy_data.txt")
 
