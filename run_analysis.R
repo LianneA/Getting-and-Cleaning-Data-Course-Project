@@ -1,4 +1,4 @@
-library (dplyr)
+
 ## Merges the training and the test sets to create one data set
 
 tr.subjs<-read.table("train/subject_train.txt")
@@ -15,7 +15,7 @@ merge.subjs<-rbind(tr.subjs,ts.subjs)
 
 ##Extracts only the measurements on the mean and standard deviation for each measurement
 
-feat<-read.table("features.txt")
+  feat<-read.table("features.txt")
 
 colnames(merge.X)<-feat[,2]
 colmean<-grepl("mean()",colnames(merge.X))
@@ -43,5 +43,5 @@ bind.all<-cbind(merge.subjs,merge.Y,merged.meanstd)
 base<-melt(bind.all,(id.vars=c("Subject","Activity"))) 
 dataset.second<- dcast(base,Subject + Activity ~variable,mean)
 names(dataset.second)[-c(1:2)]<-paste("[mean of",names(dataset.second)[-c(1:2)])
-write.table(dataset.second,"")
+write.table(dataset.second, file = "./tidy_data.txt")
 
