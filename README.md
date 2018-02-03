@@ -2,6 +2,8 @@
 ## Contents
 __Codebook__ - a documentation that describes the variables, data, and libraries used in run_analysis.R
 
+__tidy_data__ - it is the result set when no. 5 in run_analysis.R was performed
+
 __run_analysis.R__ - it is an R script that would perform the following:
 
 1. Merges the training and the test sets to create one data set.
